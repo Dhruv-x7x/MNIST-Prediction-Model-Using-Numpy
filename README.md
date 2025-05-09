@@ -22,4 +22,9 @@ I also changed the way the weights and biases were initialized. I used He's init
 
 **Testing Accuracy (1000 images)** = 90.6%
 
-Neuron Activation was consistently above 50% and no gradients vanished or exploded. The model generalizes well for unseen data.
+Neuron Activation was consistently above 50% and no gradients vanished or exploded. The model generalizes well for unseen data. At the end I even found a index where the model wrongly predicts the number 4 as 9. 
+
+## Futher Improvements
+
+- Increasing the number of layers and number of neurons in each layer. E.g. 784 -> 64 -> 32 -> 16 -> 10
+- Using other gradient descent methods that use momentum or other adaptive strategies.
