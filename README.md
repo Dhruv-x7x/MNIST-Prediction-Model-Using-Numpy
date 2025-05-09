@@ -4,7 +4,7 @@ The implementation for the forward prop and backward prop is not my original ide
 
 ## Dataset
 
-The MNIST dataset, made available from [Kaggle](https://www.kaggle.com/c/digit-recognizer/data) was used for the training. Each image is 28x28 (0-255) of handwritten numbers. There are 42000 training images. I used 41000 (90%) for training and 1000 (10%) for testing. I scaled down the images to (0,1) from (0,255) and reconverted back to the original scale for plotting images. 
+The MNIST dataset, made available from [Kaggle](https://www.kaggle.com/c/digit-recognizer/data) was used for the training. Each image is 28x28 (0-255) of handwritten numbers. There are 42000 training images. I used 37800 (90%) for training and 4200 (10%) for testing. I scaled down the images to (0,1) from (0,255) and reconverted back to the original scale for plotting images. 
 
 ## Model
 
@@ -16,6 +16,8 @@ I also changed the way the weights and biases were initialized. I used He's init
 
 ## Results
 
+Using standard gradient descent and only 2 hidden layers, 
+
 **Iterations** = 3000 (~10 minutes)
 
 **Training Accuracy (41000 images)** = 90.27%
@@ -26,7 +28,33 @@ Neuron Activation was consistently above 50% and no gradients vanished or explod
 
 ## Futher Improvements
 
-- Increasing the number of layers and number of neurons in each layer. E.g. 784 -> 64 -> 32 -> 10 with Leaky ReLU activation between each layer.
-  - I tried this but didn't see any significant improvement (Training Accuracy: 92.41%, Testing Accuracy: 92.7%)
-- Using other gradient descent methods that use momentum or other adaptive strategies.
-  - I used a traditional momentum based approach: $vW = \beta vW + (1-\beta)dW$. Where dW is the derivative of the weights used in GD, $\beta$ is a tunable hyperparameter (=0.9) and vW is a 'velocity' weight. The formula was described [here](https://www.geeksforgeeks.org/ml-momentum-based-gradient-optimizer-introduction/). The results were not better (Training Accuracy: 89.51%, Testing Accuracy: 89%) than before.
+Increasing the number of layers and number of neurons in each layer. E.g. 784 -> 64 -> 32 -> 10 with Leaky ReLU activation between each layer.
+**Training Accuracy** = 92.41%
+
+**Testing Accuracy** = 92.7%
+
+---
+
+I used a traditional momentum based approach: $vW = \beta vW + (1-\beta)dW$. Where dW is the derivative of the weights used in GD, $\beta$ is a tunable hyperparameter (=0.9) and vW is a 'velocity' weight. The formula was described [here](https://www.geeksforgeeks.org/ml-momentum-based-gradient-optimizer-introduction/). Used 2 layer network for this.
+
+**Training Accuracy** = 89.51%
+
+**Testing Accuracy** = 89%
+
+---
+
+Using Adam Optimizer was a significant improvement in training accuracy but testing accuracy did not increase more than 92%. Used 2 layer network for this.
+
+**Training Accuracy** = 95.25%
+
+**Testing Accuracy** = 92.7%
+
+At this point the model was most likely overfitting the training data. 
+
+---
+
+Using Adam Optimizer + 4 hidden layers in the network resulted in great results. 
+
+**Training Accuracy** = 99.99% (Overfitting)
+
+**Testing Accuracy** = 97.11%
