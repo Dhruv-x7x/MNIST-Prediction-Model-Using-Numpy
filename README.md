@@ -26,5 +26,7 @@ Neuron Activation was consistently above 50% and no gradients vanished or explod
 
 ## Futher Improvements
 
-- Increasing the number of layers and number of neurons in each layer. E.g. 784 -> 64 -> 32 -> 10
+- Increasing the number of layers and number of neurons in each layer. E.g. 784 -> 64 -> 32 -> 10 with Leaky ReLU activation between each layer.
+  - I tried this but didn't see any significant improvement (Training Accuracy: 92.41%, Testing Accuracy: 92.7%)
 - Using other gradient descent methods that use momentum or other adaptive strategies.
+  - I used a traditional momentum based approach: $vW = \beta vW + (1-\beta)dW$. Where dW is the derivative of the weights used in GD, $\beta$ is a tunable hyperparameter (=0.9) and vW is a 'velocity' weight. The formula was described [here](https://www.geeksforgeeks.org/ml-momentum-based-gradient-optimizer-introduction/). The results were not better (Training Accuracy: 89.51%, Testing Accuracy: 89%) than before.
