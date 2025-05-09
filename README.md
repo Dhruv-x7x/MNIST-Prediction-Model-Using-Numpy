@@ -68,6 +68,8 @@ Using Adam Optimizer + 4 hidden layers in the network resulted in great results.
 
 **Testing Accuracy** = 97.11%
 
+ADAM is known to outperform other GD methods like RMSProp, SGD, ADA, etc., This was one of the reasons why I used it. I implemented the code using the description given by Geeks4Geeks [here](https://www.geeksforgeeks.org/adam-optimizer/). 
+
 ---
 
 ## Files
@@ -76,5 +78,4 @@ Using Adam Optimizer + 4 hidden layers in the network resulted in great results.
 |--- model1.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '1'. 4 Layers + standard GD
 |--- model2.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '2'. 2 Layers + momentum GD
 |--- model3.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '3'. 2 Layers + ADAM GD
-|--- model4.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '4'. 4 Layers + ADAM GD
 ```
