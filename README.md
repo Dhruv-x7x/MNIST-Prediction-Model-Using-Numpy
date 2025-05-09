@@ -26,5 +26,5 @@ Neuron Activation was consistently above 50% and no gradients vanished or explod
 
 ## Futher Improvements
 
-- Increasing the number of layers and number of neurons in each layer. E.g. 784 -> 64 -> 32 -> 16 -> 10
+- Increasing the number of layers and number of neurons in each layer. E.g. 784 -> 64 -> 32 -> 10
 - Using other gradient descent methods that use momentum or other adaptive strategies.
