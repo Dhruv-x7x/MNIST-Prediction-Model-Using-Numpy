@@ -73,8 +73,8 @@ Using Adam Optimizer + 4 hidden layers in the network resulted in great results.
 ## Files
 ```plaintext
 |--- ML1.ipynb               # contains the experimental model described in the 'Model' section above. 2 Layers + standard GD
-|--- model1.py                    # contains only the code for the model described in section 'Further Improvements' above and subsection '1'. 4 Layers + standard GD
-|--- model2.py                    # contains only the code for the model described in section 'Further Improvements' above and subsection '2'. 2 Layers + momentum GD
-|--- model3.py                    # contains only the code for the model described in section 'Further Improvements' above and subsection '3'. 2 Layers + ADAM GD
-|--- model4.py                    # contains only the code for the model described in section 'Further Improvements' above and subsection '4'. 4 Layers + ADAM GD
+|--- model1.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '1'. 4 Layers + standard GD
+|--- model2.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '2'. 2 Layers + momentum GD
+|--- model3.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '3'. 2 Layers + ADAM GD
+|--- model4.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '4'. 4 Layers + ADAM GD
 ```
