@@ -28,7 +28,7 @@ Neuron Activation was consistently above 50% and no gradients vanished or explod
 
 ## Futher Improvements
 
-After I had done the initial experiment following Samson's video, I explored on my own and tried other strategies I had learned during my AI/ML course at IIT Bombay. 
+After I had done the initial experiment following Samson's video, I explored on my own and tried other strategies I had learned during my AI/ML course at IIT Bombay. If you want to use these models below, just copy paste the code from their respective `.py` files as is including the parameter initialization code that is given there. When calling the `learn()` function use the necessary number of inputs for 4 layers if you are using a 4 layered network --- replace `W1, b2, W2, b2` with `W1, b2, W2, b2, W3, b3, W4, b4` whereever you see it.
 
 ---
 
