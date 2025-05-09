@@ -74,8 +74,6 @@ ADAM is known to outperform other GD methods like RMSProp, SGD, ADA, etc., This 
 
 ## Table of Results for All Models
 
-## Experiment Results
-
 | Experiment | Name | Optimizer | Layers | Training Accuracy | Testing Accuracy | Notes |
 |------------|---------------|-----------|--------|-------------------|------------------|-------|
 | 1 | Model 0 | Standard GD | 3 (2 hidden + 1 input) | 90.27% | 90.6% | Naive implementation serves as baseline |
