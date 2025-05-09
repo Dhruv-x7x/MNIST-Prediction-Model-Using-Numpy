@@ -28,13 +28,20 @@ Neuron Activation was consistently above 50% and no gradients vanished or explod
 
 ## Futher Improvements
 
+After I had done the initial experiment following Samson's video, I explored on my own and tried other strategies I had learned during my AI/ML course at IIT Bombay. 
+
+---
+
+### 1 
 Increasing the number of layers and number of neurons in each layer. E.g. 784 -> 64 -> 32 -> 10 with Leaky ReLU activation between each layer.
+
 **Training Accuracy** = 92.41%
 
 **Testing Accuracy** = 92.7%
 
 ---
 
+### 2
 I used a traditional momentum based approach: $vW = \beta vW + (1-\beta)dW$. Where dW is the derivative of the weights used in GD, $\beta$ is a tunable hyperparameter (=0.9) and vW is a 'velocity' weight. The formula was described [here](https://www.geeksforgeeks.org/ml-momentum-based-gradient-optimizer-introduction/). Used 2 layer network for this.
 
 **Training Accuracy** = 89.51%
@@ -43,16 +50,18 @@ I used a traditional momentum based approach: $vW = \beta vW + (1-\beta)dW$. Whe
 
 ---
 
+### 3
 Using Adam Optimizer was a significant improvement in training accuracy but testing accuracy did not increase more than 92%. Used 2 layer network for this.
 
 **Training Accuracy** = 95.25%
 
 **Testing Accuracy** = 92.7%
 
-At this point the model was most likely overfitting the training data. 
+At this point the model was most likely overfitting the training data.
 
 ---
 
+### 4
 Using Adam Optimizer + 4 hidden layers in the network resulted in great results. 
 
 **Training Accuracy** = 99.99% (Overfitting)
