@@ -72,6 +72,18 @@ ADAM is known to outperform other GD methods like RMSProp, SGD, ADA, etc., This 
 
 ---
 
+## Table of Results for All Models
+
+## Experiment Results
+
+| Experiment | Configuration | Optimizer | Layers | Training Accuracy | Testing Accuracy | Notes |
+|------------|---------------|-----------|--------|-------------------|------------------|-------|
+| 1 | 784 → 64 → 32 → 10 with Leaky ReLU | SGD | 3 (2 hidden) | 92.41% | 92.7% | Improved depth & non-linearity helped generalization |
+| 2 | 2-layer network | Momentum (β = 0.9) | 2 (1 hidden) | 89.51% | 89.0% | Classical momentum update: `vW = β*vW + (1−β)*dW` |
+| 3 | 2-layer network | Adam | 2 (1 hidden) | 95.25% | 92.7% | Stronger convergence but slight overfitting observed |
+| 4 | 784 → 128 → 64 → 32 → 10 with Leaky ReLU | Adam | 5 (4 hidden) | 99.99% | 97.11% | Best performance; deep + adaptive optimizer = 🔥 |
+| 5 | 2 hidden layers, 3000 iterations | Standard GD | 3 (2 hidden) | 90.27% | 90.6% | Baseline with vanilla gradient descent |
+
 ## Files
 ```plaintext
 |--- ML1.ipynb               # contains the experimental model described in the 'Model' section above. 2 Layers + standard GD
