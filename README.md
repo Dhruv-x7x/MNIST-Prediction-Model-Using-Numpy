@@ -8,7 +8,7 @@ The MNIST dataset, made available from [Kaggle](https://www.kaggle.com/c/digit-r
 
 ## Model
 
-The model is a 3 layer fully connected neural network with Leaky ReLU activation. The input layer has (28x28) 784 neurons and the other two layers have 10 neurons each. The final output has softmax to convert the logits into probabilities. The maximum probability is considered the prediction of the model. 
+The model is a 3 layer fully connected neural network (MLP) with Leaky ReLU activation. The input layer has (28x28) 784 neurons and the other two layers have 10 neurons each. The final output has softmax to convert the logits into probabilities. The maximum probability is considered the prediction of the model. 
 
 Samson used ReLU activation but for some reason I got really low (30%) accuracy with that because the gradient for `db2` was vanishing. I had learned about Leaky ReLU in a course so I used that and immediately got better results. Later, I realized that the main cause for my error was not that Leaky ReLU worked better than ReLU for this shallow network but rather the input was not normalized to (0,1) range from (0,255).
 
@@ -57,7 +57,7 @@ Using Adam Optimizer was a significant improvement in training accuracy but test
 
 **Testing Accuracy** = 92.7%
 
-At this point the model was most likely overfitting the training data.
+At this point the model was most likely overfitting the training data. But I shuffled the testing data around to see if accuracy falls but it did not. I even tried shuffling training data every single iteration but the model was able to generalize well despite that. For a simple dataset such as MNIST this is expected. 
 
 ---
 
