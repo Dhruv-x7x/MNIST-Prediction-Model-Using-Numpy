@@ -77,4 +77,4 @@ I fixed all of these mistakes and added all the other improvements mentioned at 
 
 ![Confusion Matrix](https://github.com/Dhruv-x7x/MNIST-Prediction-Model-Using-Numpy/blob/main/results/confusion_matrix.png)
 
-![Neuron Weights as Images](https://github.com/Dhruv-x7x/MNIST-Prediction-Model-Using-Numpy/blob/main/results/loss_plot.png)
+![Neuron Weights as Images](https://github.com/Dhruv-x7x/MNIST-Prediction-Model-Using-Numpy/blob/main/results/neuron_plot.png)
