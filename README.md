@@ -59,7 +59,7 @@ After I had done the initial experiment following Samson's video, I explored on 
 
 ### Mistakes
 
-I realized a few frustrating bugs only after spending a long time with my research jupyter notebook and training all 5 models. Only when I trained Model 4 (ADAM + 5 layers) did I realize the fatal flaw. The 99% training accuracy clearly hinted at the following things:
+I realized a few frustrating bugs only after spending a long time with the code and training all 5 models. Only when I trained Model 4 (ADAM + 5 layers) did I realize the fatal flaw. The 99% training accuracy clearly hinted at the following things:
 - I used the first 4200 images for testing and the rest of training. There may have been some order to the dataset that the model learned and that is why it gave such a high accuracy.
   - SOLUTION: I shuffled the training data every iteration. But it did not change anything. I was performing stochastic GD so the entire training data was passed per epoch, I suspect that shuffing data will not help for SGD. So finally I ended up using Mini-Batch GD with shuffling. 
 - Very large network for a tiny dataset. I used 5 layers (784->64->64->32->10) which was overkill. Reasonable network depths gave good generalizations as is evident from the table.
