@@ -81,4 +81,4 @@ I fixed all of these mistakes and added all the other improvements mentioned at 
 
 ## Real Results
 
-
+![Confusion Matrix](https://github.com/Dhruv-x7x/MNIST-Prediction-Model-Using-Numpy/blob/main/results/confusion_matrix.png)
