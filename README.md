@@ -1,5 +1,24 @@
 # MNIST-Prediction-Model-Using-Numpy
 
+---
+
+## How to run
+
+Clone into the repo
+```bash
+git clone https://github.com/Dhruv-x7x/MNIST-Prediction-Model-Using-Numpy.git
+cd MNIST-Prediction-Model-Using-Numpy
+```
+
+Run
+```bash
+python MLP_Final.py
+```
+
+---
+
+## Introduction
+
 The original idea was taken from Samson Zhang's [video](https://www.youtube.com/watch?v=w8yWXqWQYmU&ab_channel=SamsonZhang). I used this for initial research on my own to understand backpropagation from the ground up and building a simple 2 layered MLP to predict the number shown in an image taken from the MNIST dataset. After further research about topics related to model training I improved upon this neural network in the following way:
 
 - Mini-Batch Gradient Descent:
