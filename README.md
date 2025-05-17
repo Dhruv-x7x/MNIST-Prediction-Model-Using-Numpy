@@ -109,7 +109,7 @@ history = model.train(
 | Batch Size | Testing Accuracy | Early Stop Trigger |
 |------------|------------------|--------------------|
 | 32 | 90.93% | Epoch 15 |
-| 64 | Model 1 | Standard GD | 
+| 64 | 94.21% | Epoch 25 | 
 | 128 | Model 2 | Momentum GD (β = 0.9) | 
 | 256 | Model 3 | ADAM | 
 | 512 | Model 4 | ADAM |
