@@ -1,7 +1,5 @@
 # MNIST-Prediction-Model-Using-Numpy
 
----
-
 ## How to run
 
 Clone into the repo
@@ -14,8 +12,6 @@ Run
 ```bash
 python MLP_final.py
 ```
-
----
 
 ## Introduction
 
@@ -45,13 +41,9 @@ The original idea was taken from Samson Zhang's [video](https://www.youtube.com/
 
 The MNIST dataset, made available from [Kaggle](https://www.kaggle.com/c/digit-recognizer/data) was used for the training. Each image is 28x28 (0-255) of handwritten numbers. There are 42000 training images. I used 33600 (80%) for training, 4200 (10%) for validation and 4200 (10%) for testing. I scaled down the images to (0,1) from (0,255) and reconverted back to the original scale for plotting images. 
 
----
-
 ## Initial Research and Mistakes
 
 After I had done the initial experiment following Samson's video, I explored on my own and tried other strategies I had learned during my AI/ML course at IIT Bombay. I tried leaky ReLU instead of ReLU, [momentum](https://www.geeksforgeeks.org/ml-momentum-based-gradient-optimizer-introduction/) based GD, [ADAM](https://www.geeksforgeeks.org/adam-optimizer/) GD. I tried increasing the number of layers as well. The results of all these experiments is given in the table below:
-
----
 
 ### Table of Results for all experiments
 
@@ -81,4 +73,8 @@ I fixed all of these mistakes and added all the other improvements mentioned at 
 
 ## Real Results
 
+![Loss Plot](https://github.com/Dhruv-x7x/MNIST-Prediction-Model-Using-Numpy/blob/main/results/loss_plot.png)
+
 ![Confusion Matrix](https://github.com/Dhruv-x7x/MNIST-Prediction-Model-Using-Numpy/blob/main/results/confusion_matrix.png)
+
+![Neuron Weights as Images](https://github.com/Dhruv-x7x/MNIST-Prediction-Model-Using-Numpy/blob/main/results/loss_plot.png)
