@@ -110,6 +110,8 @@ history = model.train(
 |------------|------------------|--------------------|
 | 32 | 90.93% | Epoch 15 |
 | 64 | 94.21% | Epoch 25 | 
-| 128 | Model 2 | Momentum GD (β = 0.9) | 
-| 256 | Model 3 | ADAM | 
-| 512 | Model 4 | ADAM |
+| 128 | 95.55% | Epoch 29 | 
+| 256 | 96.19% | Epoch 35 | 
+| 512 | 96.36% | Epoch 31 |
+
+Out network is overkill for MNIST so we see pretty high accuracies. And as expected, increasing batch size also increases the accuracy. A larger batch gives a more meaningful and correct gradient update. Each of these trains took 75 seconds on average. 
