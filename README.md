@@ -114,4 +114,28 @@ history = model.train(
 | 256 | 96.19% | Epoch 35 | 
 | 512 | 96.36% | Epoch 31 |
 
-Out network is overkill for MNIST so we see pretty high accuracies. And as expected, increasing batch size also increases the accuracy. A larger batch gives a more meaningful and correct gradient update. Each of these trains took 75 seconds on average. 
+Out network is overkill for MNIST so we see pretty high accuracies. And as expected, increasing batch size also increases the accuracy. A larger batch gives a more meaningful and correct gradient update. Each of these trains took 75 seconds on average. I did not scale the learning rate with batch size here. 
+
+---
+
+| Learning Rate | Testing Accuracy | Early Stop Trigger | Time Taken | 
+|------------|------------------|-----------------------|------------|
+| 0.001 | 97.26% | Epoch 29 | 143s |
+| 0.01 | 95.14% | Epoch 15 | 45s |
+| 0.02 | 92.55% | Epoch 15 | 37s |
+| 0.05 | 87.38% | Epoch 18 | 42s |
+| 0.1 | 25.19% | Epoch 11 | 27s |
+
+I decided not to use any sort of learning rate annealing strategies. I kept a constant learning rate and this experiment was done just to see how much time it takes for different learning rates and how much overfitting/underfitting it leads to. The batch size used here was 128 and patience level was 10. The results are as expected; a very tiny learning rate takes a long time to converge but gives the highest accuracy. A large step size of 0.1 does not converge and validation check quickly exits the training loop. 
+
+It's interesting to observe that the neural weights for a batch clearly look like individual numbers for learning rate 0.1 while for 0.001 they look more like noise. 
+
+---
+
+| Layers | Testing Accuracy | Early Stop Trigger | Time Taken | 
+|------------|------------------|-----------------------|------------|
+| 784 -> 10 -> 10 | 90.81% | Epoch 22 | 10s |
+| 784 -> 16 -> 10 | 95.14% | Epoch 15 | 45s |
+| 0.02 | 92.55% | Epoch 15 | 37s |
+| 0.05 | 87.38% | Epoch 18 | 42s |
+| 0.1 | 25.19% | Epoch 11 | 27s |
