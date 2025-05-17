@@ -12,7 +12,7 @@ cd MNIST-Prediction-Model-Using-Numpy
 
 Run
 ```bash
-python MLP_Final.py
+python MLP_final.py
 ```
 
 ---
