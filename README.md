@@ -112,7 +112,7 @@ history = model.train(
 | 64 | 94.21% | Epoch 25 | 
 | 128 | 95.55% | Epoch 29 | 
 | 256 | 96.19% | Epoch 35 | 
-| 512 | 96.36% | Epoch 31 |
+| 512 | **96.36%** | Epoch 31 |
 
 Out network is overkill for MNIST so we see pretty high accuracies. And as expected, increasing batch size also increases the accuracy. A larger batch gives a more meaningful and correct gradient update. Each of these trains took 75 seconds on average. I did not scale the learning rate with batch size here. 
 
@@ -120,7 +120,7 @@ Out network is overkill for MNIST so we see pretty high accuracies. And as expec
 
 | Learning Rate | Testing Accuracy | Early Stop Trigger | Time Taken | 
 |------------|------------------|-----------------------|------------|
-| 0.001 | 97.26% | Epoch 29 | 143s |
+| 0.001 | **97.26%** | Epoch 29 | 143s |
 | 0.01 | 95.14% | Epoch 15 | 45s |
 | 0.02 | 92.55% | Epoch 15 | 37s |
 | 0.05 | 87.38% | Epoch 18 | 42s |
@@ -132,10 +132,22 @@ It's interesting to observe that the neural weights for a batch clearly look lik
 
 ---
 
-| Layers | Testing Accuracy | Early Stop Trigger | Time Taken | 
-|------------|------------------|-----------------------|------------|
-| 784 -> 10 -> 10 | 90.81% | Epoch 22 | 10s |
-| 784 -> 16 -> 10 | 95.14% | Epoch 15 | 45s |
-| 0.02 | 92.55% | Epoch 15 | 37s |
-| 0.05 | 87.38% | Epoch 18 | 42s |
-| 0.1 | 25.19% | Epoch 11 | 27s |
+| Idx | Layers | Testing Accuracy | Early Stop Trigger | Time Taken | 
+|-----|------------|------------------|-----------------------|------------|
+| 1 | 784 -> 10 -> 10 | 90.81% | Epoch 22 | 10s |
+| 2 | 784 -> 16 -> 10 | 92.83% | Epoch 22 | 15s |
+| 3 | 784 -> 32 -> 16 -> 10 | 93.52% | Epoch 34 | 24s |
+| 4 | 784 -> 64 -> 32 -> 10 | 94.93% | Epoch 30 | 39s |
+| 5 | 784 -> 64 -> 32 -> 16 -> 10 | 93.71% | Epoch 37 | 97s |
+| 6 | 784 -> 128 -> 64 -> 32 -> 10 | 94.52% | Epoch 35 | 147s |
+| 7 | 784 -> 256 -> 128 -> 64 -> 32 -> 10 | **95.14%** | Epoch 39 | 510s |
+
+Learning rate: 0.01
+Batch Size: 128
+
+The first row here is the exact model we used in the first row of our research experiments table above and the results agree!
+
+What we see is that deeper networks and networks with more neurons per layer have higher accuracy as they are able to generalize over more features than shallow networks. Every time we increase the number of layers, there is a significant jump in the training time. This effect is most apparent in the jump from 4 layers to 5 layers, a 58s jump. We don't see accuracy increasing further in excessively deep networks here because of regularization which prevents overfitting and also all the other techniques we utilized to avoid overfitting such as batch normalization and drop out. The last row presents a way too big network for MNIST, with 6 layers. I wouldn't believe MNIST to have this many features to learn for accurate prediction but the accuracy is highest for this network which takes almost 9 minutes to train.
+
+Network 7 and Network 4 have very similar accuracy (only 0.21% difference) but Network 4 is 12 times faster. We can conclude that having a larger network is not necessarily better for accuracy. 
+
