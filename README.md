@@ -78,3 +78,26 @@ I fixed all of these mistakes and added all the other improvements mentioned at 
 ![Confusion Matrix](https://github.com/Dhruv-x7x/MNIST-Prediction-Model-Using-Numpy/blob/main/results/confusion_matrix.png)
 
 ![Neuron Weights as Images](https://github.com/Dhruv-x7x/MNIST-Prediction-Model-Using-Numpy/blob/main/results/neuron_plot.png)
+
+### Final MLP
+
+The results in the above plots are for the following parameters:
+
+```python
+model = MLP(
+        layer_dims=[784, 128, 64, 32, 10],
+        activations=['leaky_relu', 'leaky_relu', 'leaky_relu', 'softmax'],
+        keep_probs=[0.7, 0.7, 0.7, 1.0],
+        l2_lambda=0.01,
+        random_seed=42
+    )
+history = model.train(
+        X_train, y_train, 
+        X_val=X_val, y_val=y_val,
+        learning_rate=0.01,
+        num_epochs=50,
+        batch_size=128,
+        print_interval=5,
+        patience=10
+    )
+```
