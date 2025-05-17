@@ -10,11 +10,11 @@ The original idea was taken from Samson Zhang's [video](https://www.youtube.com/
 - Testing Set:
   - I used 1000 images in the testing set earlier but I found that to be too little, so I set aside 10% of the dataset (4200 images), randomly sampled. The final split was 80%, 10%, 10%, no overlap between them.
 - L2 Regularization:
-  - I added regularization to avoid over-reliance on any one weight or bias. We make sure that we penalize excessively large weights and biases.
+  - I added regularization to avoid over-reliance on any one weight or bias. We penalize large weights and biases or in other words, force them to be small.
 - Bias initialization:
   - Although Zhang used a simple initialization that works decently well, I used He's initialization as it works amazingly for ReLU activation functions. But I had set biases to 0, I changed that to a small positive value and it increased active neuron population.
 - Drop-out:
-  - Randomly drops neurons in a layer if used. Helps prevent overfitting by making the neurons not realy too much on each other. Initial experiments revealed that my training accuracy was much higher than my testing accuracy, which is evidence of overfitting. Although I also use L2 Regularization and batch norm, I wanted to experiment with Drop-out as well.
+  - Randomly drops neurons in a layer if used. Helps prevent overfitting by making the neurons not rely too much on each other. Initial experiments revealed that my training accuracy was much higher than my testing accuracy, which is evidence of overfitting. Although I also use L2 Regularization and batch norm, I wanted to experiment with drop-out as well.
 - Gradient Clipping:
   - Zhang did not face this issue and neither did I, initially. But as I kept experimenting with network depth, types of initialization, activations etc., I faced the issue of gradient explosion. I once got a gradient in the order of 1e97. I added some simple gradient clipping code to prevent this from happening.
 - Activation functions:
@@ -57,3 +57,9 @@ I realized a few frustrating bugs only after spending a long time with my resear
   - SOLUTION: L2 Regularization
 
 I fixed all of these mistakes and added all the other improvements mentioned at the top of this README as a list. 
+
+--- 
+
+## Real Results
+
+
