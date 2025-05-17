@@ -1,78 +1,40 @@
 # MNIST-Prediction-Model-Using-Numpy
 
-The implementation for the forward prop and backward prop is not my original idea. I followed Samson Zhang's [video](https://www.youtube.com/watch?v=w8yWXqWQYmU). I improved upon his model by using Leaky ReLU and He's initilization. This project was done purely to learn how exactly neural networks learn from scratch without using any libraries such as Keras/Tensorflow. Only Numpy is used in the code for the neural network.
+The original idea was taken from Samson Zhang's [video](https://www.youtube.com/watch?v=w8yWXqWQYmU&ab_channel=SamsonZhang). I used this for initial research on my own to understand backpropagation from the ground up and building a simple 2 layered MLP to predict the number shown in an image taken from the MNIST dataset. After further research about topics related to model training I improved upon this neural network in the following way:
+
+- Mini-Batch Gradient Descent:
+  - Much more memory efficient and avoids overfitting by adding a little noise to the training since it randomly samples training data for each batch. Also the gradient descent is much smoother albeit slower than stochastic gradient descent. The code I wrote allows one to easily change the batch size and train the model. For the results shown here, the batch size used was 128.
+  - Batch normalization was implemented for fixing the [internal covariate shift](https://www.geeksforgeeks.org/what-is-batch-normalization-in-deep-learning/). This is not really needed as our network is shallow and the shift is not significant but I tried it because I also experimented with 5-6 layer MLPs. It makes the batch have 0 mean and a variance of 1. Introduces two learnable parameters gamma and beta which adds to the complexity.
+- Validation Set:
+  - Samson does not use a validation set to monitor overfitting and implement early stopping if valdiation accuracy plateaus. I used a random sample of 10% of the dataset as validation set.
+- Testing Set:
+  - I used 1000 images in the testing set earlier but I found that to be too little, so I set aside 10% of the dataset (4200 images), randomly sampled. The final split was 80%, 10%, 10%, no overlap between them.
+- L2 Regularization:
+  - I added regularization to avoid over-reliance on any one weight or bias. We make sure that we penalize excessively large weights and biases.
+- Bias initialization:
+  - Although Zhang used a simple initialization that works decently well, I used He's initialization as it works amazingly for ReLU activation functions. But I had set biases to 0, I changed that to a small positive value and it increased active neuron population.
+- Drop-out:
+  - Randomly drops neurons in a layer if used. Helps prevent overfitting by making the neurons not realy too much on each other. Initial experiments revealed that my training accuracy was much higher than my testing accuracy, which is evidence of overfitting. Although I also use L2 Regularization and batch norm, I wanted to experiment with Drop-out as well.
+- Gradient Clipping:
+  - Zhang did not face this issue and neither did I, initially. But as I kept experimenting with network depth, types of initialization, activations etc., I faced the issue of gradient explosion. I once got a gradient in the order of 1e97. I added some simple gradient clipping code to prevent this from happening.
+- Activation functions:
+  - Added more options for activation functions such as sigmoid and tanh. I already tried leaky ReLU in my research and found it to work very well.
+- Plotting Loss and Confusion Matrix:
+  - For more completeness of results I added plots as well as terminal outputs. Also it is surprisingly easy to plot a confusion matrix, we just add a 1 for every location indexed by (y_pred, y_true) and done.
 
 ## Dataset
 
-The MNIST dataset, made available from [Kaggle](https://www.kaggle.com/c/digit-recognizer/data) was used for the training. Each image is 28x28 (0-255) of handwritten numbers. There are 42000 training images. I used 37800 (90%) for training and 4200 (10%) for testing. I scaled down the images to (0,1) from (0,255) and reconverted back to the original scale for plotting images. 
-
-## Model
-
-The model is a 3 layer fully connected neural network (MLP) with Leaky ReLU activation. The input layer has (28x28) 784 neurons and the other two layers have 10 neurons each. The final output has softmax to convert the logits into probabilities. The maximum probability is considered the prediction of the model. 
-
-Samson used ReLU activation but for some reason I got really low (30%) accuracy with that because the gradient for `db2` was vanishing. I had learned about Leaky ReLU in a course so I used that and immediately got better results. Later, I realized that the main cause for my error was not that Leaky ReLU worked better than ReLU for this shallow network but rather the input was not normalized to (0,1) range from (0,255).
-
-I also changed the way the weights and biases were initialized. I used He's initialization which works best for vanishing gradient problems while using ReLU activation. I read about the idea [here](https://www.geeksforgeeks.org/kaiming-initialization-in-deep-learning/). 
-
-## Results
-
-Using standard gradient descent and only 2 hidden layers, 
-
-**Iterations** = 3000 (~10 minutes)
-
-**Training Accuracy (41000 images)** = 90.27%
-
-**Testing Accuracy (1000 images)** = 90.6%
-
-Neuron Activation was consistently above 50% and no gradients vanished or exploded. The model generalizes well for unseen data. At the end I even found a index where the model wrongly predicts the number 4 as 9. 
-
-## Futher Improvements
-
-After I had done the initial experiment following Samson's video, I explored on my own and tried other strategies I had learned during my AI/ML course at IIT Bombay. If you want to use these models below, just copy paste the code from their respective `.py` files as is including the parameter initialization code that is given there. When calling the `learn()` function use the necessary number of inputs for 4 layers if you are using a 4 layered network --- replace `W1, b1, W2, b2` with `W1, b1, W2, b2, W3, b3, W4, b4` whereever you see it.
+The MNIST dataset, made available from [Kaggle](https://www.kaggle.com/c/digit-recognizer/data) was used for the training. Each image is 28x28 (0-255) of handwritten numbers. There are 42000 training images. I used 33600 (80%) for training, 4200 (10%) for validation and 4200 (10%) for testing. I scaled down the images to (0,1) from (0,255) and reconverted back to the original scale for plotting images. 
 
 ---
 
-### 1 
-Increasing the number of layers and number of neurons in each layer. E.g. 784 -> 64 -> 32 -> 10 with Leaky ReLU activation between each layer.
+## Initial Research and Mistakes
 
-**Training Accuracy** = 92.41%
-
-**Testing Accuracy** = 92.7%
+After I had done the initial experiment following Samson's video, I explored on my own and tried other strategies I had learned during my AI/ML course at IIT Bombay. I tried leaky ReLU instead of ReLU, [momentum](https://www.geeksforgeeks.org/ml-momentum-based-gradient-optimizer-introduction/) based GD, [ADAM](https://www.geeksforgeeks.org/adam-optimizer/) GD. I tried increasing the number of layers as well. The results of all these experiments is given in the table below:
 
 ---
 
-### 2
-I used a traditional momentum based approach: $vW = \beta vW + (1-\beta)dW$. Where dW is the derivative of the weights used in GD, $\beta$ is a tunable hyperparameter (=0.9) and vW is a 'velocity' weight. The formula was described [here](https://www.geeksforgeeks.org/ml-momentum-based-gradient-optimizer-introduction/). Used 2 layer network for this.
-
-**Training Accuracy** = 89.51%
-
-**Testing Accuracy** = 89%
-
----
-
-### 3
-Using Adam Optimizer was a significant improvement in training accuracy but testing accuracy did not increase more than 92%. Used 2 layer network for this.
-
-**Training Accuracy** = 95.25%
-
-**Testing Accuracy** = 92.7%
-
-At this point the model was most likely overfitting the training data. But I shuffled the testing data around to see if accuracy falls but it did not. I even tried shuffling training data every single iteration but the model was able to generalize well despite that. For a simple dataset such as MNIST this is expected. 
-
----
-
-### 4
-Using Adam Optimizer + 4 hidden layers in the network resulted in great results. 
-
-**Training Accuracy** = 99.99% (Overfitting)
-
-**Testing Accuracy** = 97.11%
-
-ADAM is known to outperform other GD methods like RMSProp, SGD, ADA, etc., This was one of the reasons why I used it. I implemented the code using the description given by Geeks4Geeks [here](https://www.geeksforgeeks.org/adam-optimizer/). 
-
----
-
-## Table of Results for All Models
+### Table of Results for all experiments
 
 | Experiment | Name | Optimizer | Layers | Training Accuracy | Testing Accuracy | Notes |
 |------------|---------------|-----------|--------|-------------------|------------------|-------|
@@ -82,10 +44,16 @@ ADAM is known to outperform other GD methods like RMSProp, SGD, ADA, etc., This 
 | 4 | Model 3 | ADAM | 3 (2 hidden + 1 input) | 95.25% | 92.7% | Stronger convergence but slight overfitting observed |
 | 5 | Model 4 | ADAM | 5 (4 hidden + 1 input) | 99.99% | 97.11% | Best performance; Overfitted on Training Data |
 
-## Files
-```plaintext
-|--- ML1.ipynb               # contains the experimental model described in the 'Model' section above. 2 Layers + standard GD
-|--- model1.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '1'. 4 Layers + standard GD
-|--- model2.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '2'. 2 Layers + momentum GD
-|--- model3.py               # contains only the code for the model described in section 'Further Improvements' above and subsection '3'. 2 Layers + ADAM GD
-```
+---
+
+### Mistakes
+
+I realized a few frustrating bugs only after spending a long time with my research jupyter notebook and training all 5 models. Only when I trained Model 4 (ADAM + 5 layers) did I realize the fatal flaw. The 99% training accuracy clearly hinted at the following things:
+- I used the first 4200 images for testing and the rest of training. There may have been some order to the dataset that the model learned and that is why it gave such a high accuracy.
+  - SOLUTION: I shuffled the training data every iteration. But it did not change anything. I was performing stochastic GD so the entire training data was passed per epoch, I suspect that shuffing data will not help for SGD. So finally I ended up using Mini-Batch GD with shuffling. 
+- Very large network for a tiny dataset. I used 5 layers (784->64->64->32->10) which was overkill. Reasonable network depths gave good generalizations as is evident from the table.
+  - SOLUTION: Shallower network
+- There was a need for regularization! I am at 100% accuracy which is crazy. This is not how you train neural nets.
+  - SOLUTION: L2 Regularization
+
+I fixed all of these mistakes and added all the other improvements mentioned at the top of this README as a list. 
